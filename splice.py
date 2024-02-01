@@ -79,7 +79,7 @@ if __name__ == '__main__':
     parser.add_argument("input_dir", type = str, help="root dir of dataset")
     parser.add_argument("output_dir", type = str, help="out root dir to save large images and annotation files")
     parser.add_argument("img_size", type = int, help="size of small images")
-    parser.add_argument("splice_num", type = int help="number of small images in one scale")
+    parser.add_argument("splice_num", type = int, help="number of small images in one scale")
     parser.add_argument("output_num", type = int, help="number of generated large images")
     args = parser.parse_args()
 
