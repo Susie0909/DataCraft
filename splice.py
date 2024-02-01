@@ -1,28 +1,6 @@
 """
-本脚本用于将带标注的小图像拼接成大图像。包括图像拼接和相应gt标注的修改。
+Splice the small images into a large image, including image splicing and annotation convertion.
 
-文件目录结构
-|--input_dir # 小图像目录
-|   |--images # 小图像
-|       |--img1.png
-|       |--img2.png
-|   |--labels # 对应gt真值，yolo格式
-|       |--anno1.txt
-|       |--anno2.txt
-|--output_dir # 拼接后的大图像目录
-|   |--images # 大图像
-|       |--img1.tiff
-|       |--img2.tiff
-|   |--labels # 对应gt真值
-|       |--anno1.txt
-|       |--anno2.txt
-
-参数：
-input_dir：小图像及其标注文件路径
-output_dir：新大图图像及标注文件路径
-img_size：小图像尺寸 (默认800)
-splice_num：水平/纵向方向，拼接个数
-output_num：生成的大图数量
 """
 
 from PIL import Image
@@ -42,8 +20,8 @@ def main(args):
     spl_num = args.splice_num
     output_num = args.output_num
     
-    imgs_path = input / "images" / "train"
-    annos_path = input / "labels" / "train"
+    imgs_path = input / "images"
+    annos_path = input / "labels"
     imgs_list = sorted(glob.glob(f"{imgs_path}/*"))
     annos_list = sorted(glob.glob(f"{annos_path}/*"))
 
@@ -98,11 +76,11 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("input_dir", type = str)
-    parser.add_argument("output_dir", type = str)
-    parser.add_argument("img_size", type = int)
-    parser.add_argument("splice_num", type = int)
-    parser.add_argument("output_num", type = int)
+    parser.add_argument("input_dir", type = str, help="root dir of dataset")
+    parser.add_argument("output_dir", type = str, help="out root dir to save large images and annotation files")
+    parser.add_argument("img_size", type = int, help="size of small images")
+    parser.add_argument("splice_num", type = int help="number of small images in one scale")
+    parser.add_argument("output_num", type = int, help="number of generated large images")
     args = parser.parse_args()
 
     
